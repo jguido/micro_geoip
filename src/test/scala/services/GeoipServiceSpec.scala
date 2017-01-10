@@ -8,6 +8,8 @@ import geoip.services.GeoipService
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
 
 class GeoipServiceSpec extends WordSpec with Matchers with ScalatestRouteTest with GeoipService with BeforeAndAfterAll {
+  override implicit val geoFile: File = new File(getClass.getResource("/GeoLiteCity.dat").getPath)
+
   "GeoipService" should {
     "Return ip information for a GET request" in {
       val attendedResponse = """{"city":"Toronto","latitude":43.6383056640625,"timezone":"America/Toronto","countryName":"Canada","longitude":-79.43009948730469,"postalCode":"M6K","countryCode":"CA","region":"ON","regionName":"Ontario"}"""
@@ -18,5 +20,4 @@ class GeoipServiceSpec extends WordSpec with Matchers with ScalatestRouteTest wi
       }
     }
   }
-  override implicit val geoFile: File = new File(getClass.getResource("/GeoLiteCity.dat").getPath)
 }
